@@ -1,5 +1,6 @@
 Student Management System API
 First you need to create virtual Environment. After that install requirements.txt.
+
 import postman collections - https://api.postman.com/collections/22946176-186f2049-8160-49a1-ab6a-d2ffc5b5b731?access_key=PMAT-01HS34SYY7T6XADB8V89KE8C6J
 
 http://127.0.0.1:8000/api/student-class - This url is used for the GET and POST student class. \method - POST\GET ||
