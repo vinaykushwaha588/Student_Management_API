@@ -1,4 +1,4 @@
-from .serializers import *
+from api.serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -27,9 +27,9 @@ class CreateClassView(APIView):
 class RegisterStudentView(APIView):
 
     def get(self, request):
-        query_set = User.objects.all()
-        serializer = UserSerializers(query_set, many=True)
-        return Response({'success': True, 'data': serializer.data}, status=status.HTTP_200_OK)
+        query_set = User.objects.all().values('id', 'email', 'mobile', 'first_name', 'last_name', 'cls__cls_name',
+                                              'image', 'dob', 'is_inactive')
+        return Response({'success': True, 'data': query_set}, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         serializer = UserSerializers(data=request.data, context={'request': request})
