@@ -57,9 +57,10 @@ class GetUpdateStudentView(APIView):
 
     def get(self, request):
         user_id = request.user.id
-        user = User.objects.get(id=user_id)
-        serializer = UserSerializers(user)
-        return Response({'success': True, 'data': serializer.data}, status=status.HTTP_200_OK)
+        user = User.objects.filter(id=user_id).values('id', 'email', 'mobile', 'first_name', 'last_name',
+                                                      'cls__cls_name', 'image', 'dob', )
+
+        return Response({'success': True, 'data': user}, status=status.HTTP_200_OK)
 
     def put(self, request):
         user = User.objects.get(id=request.user.id)
