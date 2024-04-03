@@ -31,6 +31,12 @@ class StudentClassSerializers(serializers.ModelSerializer):
 class UserSerializers(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True)
     # cls = serializers.SerializerMethodField()
+    #
+    # def get_cls(self, obj):
+    #     try:
+    #         return getattr(obj.cls, 'cls_name', None)
+    #     except AttributeError:
+    #         return None
 
     class Meta:
         model = User
@@ -55,12 +61,6 @@ class UserSerializers(serializers.ModelSerializer):
         except ObjectDoesNotExist:
             raise Http404
         return std_cls
-
-    # def get_cls(self, obj):
-    #     try:
-    #         return getattr(obj.cls, 'cls_name', None)
-    #     except AttributeError:
-    #         return None
 
     def create(self, validated_data):
         validated_data.pop('confirm_password', None)
