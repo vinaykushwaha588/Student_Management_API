@@ -56,11 +56,11 @@ class UserSerializers(serializers.ModelSerializer):
             raise Http404
         return std_cls
 
-    def get_cls(self, obj):
-        try:
-            return getattr(obj.cls, 'cls_name', None)
-        except AttributeError:
-            return None
+    # def get_cls(self, obj):
+    #     try:
+    #         return getattr(obj.cls, 'cls_name', None)
+    #     except AttributeError:
+    #         return None
 
     def create(self, validated_data):
         validated_data.pop('confirm_password', None)
