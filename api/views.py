@@ -10,9 +10,8 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 class CreateClassView(APIView):
 
     def get(self, request):
-        query_set = StudentClass.objects.all()
-        serializer = StudentClassSerializers(query_set, many=True)
-        return Response({'success': True, 'data': serializer.data})
+        query_set = StudentClass.objects.all().values('id', 'cls_name')
+        return Response({'success': True, 'data': query_set})
 
     def post(self, request, *args, **kwargs):
         serializer = StudentClassSerializers(data=request.data)
